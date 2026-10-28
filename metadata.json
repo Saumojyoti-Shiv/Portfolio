@@ -1,0 +1,6 @@
+{
+  "name": "Saumojyoti — Interactive Developer Portfolio",
+  "description": "Animated interactive developer portfolio featuring a 3D physics wordmark preloader, interactive WebGL particle portrait, and smooth scroll-driven typography.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

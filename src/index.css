@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #e8e4dc;
+  --accent-hover: #d6d1c6;
+  --accent-contrast: #050505;
+  --surface-lit: #cfc9bc;
+  --surface-lit-ink: #16150f;
+  --surface-lit-ink-soft: #2c2a22;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #050505;
+  color: #ffffff;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+  to {
+    transform: translate(-50%);
+  }
+}
+
+.marquee-row {
+  --marquee-fade: 12%;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--marquee-fade),
+    #000 calc(100% - var(--marquee-fade)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 var(--marquee-fade),
+    #000 calc(100% - var(--marquee-fade)),
+    transparent 100%
+  );
+  overflow: hidden;
+}
+
+.marquee-track {
+  will-change: transform;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+  display: flex;
+}
+
+.marquee-row:hover .marquee-track,
+.marquee-row:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes halo {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  70%,
+  to {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+.animate-halo {
+  animation: 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite halo;
+}
+
+@keyframes enter-bottom-right {
+  0% {
+    clip-path: inset(100% 0 0 100%);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+
+.animate-enter-br {
+  animation: 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards enter-bottom-right;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards fadeInUp;
+}
+
+@property --rule-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+.service-row {
+  --rule-scale: 1;
+}
+
+.service-row::after {
+  content: "";
+  height: 1px;
+  transform: scaleX(var(--rule-scale));
+  transform-origin: 0;
+  background: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.hover-rule {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover-rule:hover,
+.hover-rule:focus-visible {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
